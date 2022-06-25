@@ -21,72 +21,29 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {Header} from './src/components/header';
 import {MainLayout} from './src/layouts/mainLayout';
-
-const Section = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+import {THEME} from './src/themes/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <MainLayout>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View>
+      <View
+        style={{
+          height: THEME.SIZES.padding * 8,
+        }}>
+        <Header />
+
         <Text>first step</Text>
       </View>
     </MainLayout>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

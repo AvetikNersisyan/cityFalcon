@@ -7,6 +7,10 @@ const SIZES = {
 const COLORS = {
   lightBlue: '#3971c1',
   textColorDark: '#292929',
+  white: '#fff',
+  white2: '#f7f7f7',
+  gray: '#dddddd',
+  black: 'black',
 };
 
 export const THEME = {

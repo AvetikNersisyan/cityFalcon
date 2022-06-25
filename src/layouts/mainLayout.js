@@ -3,15 +3,13 @@ import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {THEME} from '../themes/theme';
 
 export const MainLayout = ({children}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>{children}</Text>
-    </SafeAreaView>
-  );
+  return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: THEME.SIZES.padding * 7,
+    flex: 1,
+
+    // padding: THEME.SIZES.padding,
   },
 });
