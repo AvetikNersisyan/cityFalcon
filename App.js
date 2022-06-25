@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
   SafeAreaView,
@@ -25,11 +25,22 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {Header} from './src/components/header';
+import {useFetchData} from './src/hooks/useFetchData';
 import {MainLayout} from './src/layouts/mainLayout';
 import {THEME} from './src/themes/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const [data, setData] = useState(null);
+
+  const [fetch, status] = useFetchData(setData);
+
+  console.log(data, 'data');
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <MainLayout>
