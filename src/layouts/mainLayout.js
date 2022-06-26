@@ -8,8 +8,7 @@ export const MainLayout = ({children}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-
-    // padding: THEME.SIZES.padding,
+    // flex: 1,
+    padding: THEME.SIZES.padding,
   },
 });
