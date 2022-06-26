@@ -28,7 +28,10 @@ export const PublicationItem = ({item}) => {
         <View
           style={[
             styles.score,
-            {backgroundColor: old_score > score && THEME.COLORS.red},
+            {
+              backgroundColor:
+                old_score > score ? THEME.COLORS.red : THEME.COLORS.green,
+            },
           ]}>
           <Text style={styles.scoreText}>{score}%</Text>
         </View>

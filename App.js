@@ -35,14 +35,30 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const [data, setData] = useState(null);
+  const [token, setToken] = useState(data?.next_page_token);
+  const [shouldFetch, setShouldFetch] = useState(false);
 
-  const [fetch, status] = useFetchData(setData);
+  const addNewData = newData => {
+    setToken(newData.next_page_token);
+    if (data) {
+      setData([...data, ...newData.stories]);
+    } else {
+      setData(newData.stories);
+    }
+  };
+
+  const [fetch, status] = useFetchData(addNewData, [
+    'next_page_token=' + token,
+    'limit=20',
+  ]);
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [shouldFetch]);
 
-  console.log(data, 'data');
+  const onEndReached = () => {
+    setShouldFetch(p => !p);
+  };
 
   return (
     <MainLayout>
@@ -60,7 +76,7 @@ const App = () => {
         <Text>Watchlist</Text>
       </View>
       {data ? (
-        <MainContent data={data?.stories} />
+        <MainContent status={status} onEndReached={onEndReached} data={data} />
       ) : (
         <ActivityIndicator animating={true} />
       )}
