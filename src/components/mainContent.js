@@ -19,9 +19,9 @@ export const MainContent = ({data, onEndReached, status}) => {
         onEndReached={onEndReached}
         showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.6}
-        refreshing={status === STATUS.LOADING}
-        // ListFooterComponent={<FooterLoader status={status} />}
-        onRefresh={() => console.log('refresh')}
+        // refreshing={status === STATUS.LOADING}
+        ListFooterComponent={<FooterLoader status={status} />}
+        // onRefresh={() => console.log('refresh')}
       />
     </View>
   );

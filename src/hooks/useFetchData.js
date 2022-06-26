@@ -12,11 +12,14 @@ export const STATUS = {
 export const useFetchData = (setData, queryParams = []) => {
   const [status, setStatus] = useState(STATUS.INITIAL);
 
-  const params = queryParams.reduce((accum, currValue) => {
-    return accum + currValue + '&';
+  const params = queryParams.reduce((accum, currValue, idx, arr) => {
+    let paramString = accum + currValue;
+    if (idx !== arr.length - 1) {
+      paramString += '&';
+    }
+    return paramString;
   }, '?');
 
-  console.log(params);
   const fetch = () => {
     setStatus(STATUS.LOADING);
     axios

@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {THEME} from '../../themes/theme';
 import {Dimensions} from 'react-native';
+import moment from 'moment';
 
 export const PublicationItem = ({item}) => {
   const {
@@ -22,7 +23,7 @@ export const PublicationItem = ({item}) => {
       <View style={[styles.itemHeader]}>
         <Image style={styles.authorImage} source={{uri: author_image_url}} />
         <View style={[styles.title, {width: width - 100}]}>
-          <Text style={{textAlign: 'left'}}>{title}</Text>
+          <Text style={styles.titleText}>{title}</Text>
         </View>
 
         <View
@@ -35,6 +36,29 @@ export const PublicationItem = ({item}) => {
           ]}>
           <Text style={styles.scoreText}>{score}%</Text>
         </View>
+      </View>
+
+      <View style={[styles.meta, {marginVertical: 1}]}>
+        <Text
+          style={{
+            color: THEME.COLORS.warmGray,
+            fontSize: 12,
+          }}>
+          {domain_name}
+        </Text>
+
+        <Text
+          style={{
+            color: THEME.COLORS.warmGray,
+            fontSize: 12,
+            paddingLeft: THEME.SIZES.padding * 2,
+          }}>
+          {moment(publishTime).fromNow()}
+        </Text>
+      </View>
+
+      <View style={[styles.description, {width: width - 100}]}>
+        <Text>{description}</Text>
       </View>
     </View>
   );
@@ -50,11 +74,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
+    paddingHorizontal: THEME.SIZES.padding,
+  },
+  titleText: {
+    textAlign: 'left',
     fontSize: 14,
     lineHeight: 21,
     fontWeight: 'bold',
-    paddingHorizontal: THEME.SIZES.padding,
   },
+  description: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: THEME.SIZES.margin,
+    marginLeft: THEME.SIZES.margin + 20,
+  },
+  meta: {
+    marginTop: THEME.SIZES.margin,
+    marginLeft: THEME.SIZES.margin + 20,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+
   score: {
     padding: 6,
     backgroundColor: THEME.COLORS.green,

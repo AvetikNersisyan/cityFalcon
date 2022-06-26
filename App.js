@@ -25,6 +25,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {FilterOptions} from './src/components/filters/filterOptions';
+import {FilterButton} from './src/components/filters/filters';
 import {Header} from './src/components/header';
 import {MainContent} from './src/components/mainContent';
 import {useFetchData} from './src/hooks/useFetchData';
@@ -37,6 +39,7 @@ const App = () => {
   const [data, setData] = useState(null);
   const [token, setToken] = useState(data?.next_page_token);
   const [shouldFetch, setShouldFetch] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const addNewData = newData => {
     setToken(newData.next_page_token);
@@ -60,6 +63,10 @@ const App = () => {
     setShouldFetch(p => !p);
   };
 
+  const onOpenFilters = () => {
+    setVisible(p => !p);
+  };
+
   return (
     <MainLayout>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -69,12 +76,21 @@ const App = () => {
         }}>
         <Header />
       </View>
+
+      {/* <FilterOptions visible={visible} /> */}
+
       <View
         style={{
-          paddingVertical: THEME.SIZES.padding,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}>
-        <Text>Watchlist</Text>
+        <View>
+          <Text>Watchlist</Text>
+        </View>
+        <FilterButton onPress={onOpenFilters} />
       </View>
+
       {data ? (
         <MainContent status={status} onEndReached={onEndReached} data={data} />
       ) : (
